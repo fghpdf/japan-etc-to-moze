@@ -20,7 +20,6 @@ export default function Home() {
       const time = columns[1]?.trim() || ''        // 時分（自）
       const fromIC = columns[4]?.trim() || ''      // 利用ＩＣ（自）
       const toIC = columns[5]?.trim() || ''        // 利用ＩＣ（至）
-      const originalAmount = columns[6]?.trim() || '0'  // 割引前料金
       const discountAmount = columns[7]?.trim() || '0'  // ＥＴＣ割引額
       const finalAmount = columns[8]?.trim() || '0'     // 通行料金
 
