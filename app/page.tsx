@@ -1,6 +1,10 @@
 'use client'
 
 import { useState } from 'react'
+import dayjs from 'dayjs'
+import customParseFormat from 'dayjs/plugin/customParseFormat'
+
+dayjs.extend(customParseFormat)
 
 export default function Home() {
   const [isProcessing, setIsProcessing] = useState(false)
@@ -32,8 +36,12 @@ export default function Home() {
       // 构建描述（限制在300字以内）
       const description = `${fromIC} → ${toIC}`.slice(0, 300)
       
-      // 格式化日期为 YYYY/M/D
-      const formattedDate = date.replace(/(\d{4})(\d{2})(\d{2})/, '$1/$2/$3')
+      // 格式化日期为 YYYY/MM/DD
+      const dateDigits = date.replace(/\D/g, '')
+      const parsedDate = dayjs(dateDigits, 'YYYYMMDD', true)
+      const formattedDate = parsedDate.isValid()
+        ? parsedDate.format('YYYY/MM/DD')
+        : date
       
       // 格式化时间为 HH:mm
       const formattedTime = time.replace(/(\d{2})(\d{2})/, '$1:$2')
